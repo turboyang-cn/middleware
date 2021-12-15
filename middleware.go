@@ -6,12 +6,12 @@ type middleware func(http.Handler) http.Handler
 
 type Router struct {
 	chain    []middleware
-	serveMux *http.ServeMux
+	ServeMux *http.ServeMux
 }
 
 func NewRouter() *Router {
 	return &Router{
-		serveMux: http.NewServeMux(),
+		ServeMux: http.NewServeMux(),
 	}
 }
 
@@ -26,7 +26,7 @@ func (r *Router) Add(route string, f func(w http.ResponseWriter, r *http.Request
 		mergedHandler = r.chain[i](mergedHandler)
 	}
 
-	r.serveMux.Handle(route, mergedHandler)
+	r.ServeMux.Handle(route, mergedHandler)
 
 	return mergedHandler
 }
