@@ -1,17 +1,19 @@
 package middleware
 
-import "net/http"
+import (
+	"net/http"
+)
 
 type middleware func(http.Handler) http.Handler
 
 type Router struct {
 	chain    []middleware
-	ServeMux *http.ServeMux
+	serveMux *http.ServeMux
 }
 
 func NewRouter() *Router {
 	return &Router{
-		ServeMux: http.NewServeMux(),
+		serveMux: http.NewServeMux(),
 	}
 }
 
@@ -26,7 +28,19 @@ func (r *Router) Add(route string, f func(w http.ResponseWriter, r *http.Request
 		mergedHandler = r.chain[i](mergedHandler)
 	}
 
-	r.ServeMux.Handle(route, mergedHandler)
+	r.serveMux.Handle(route, mergedHandler)
 
 	return mergedHandler
+}
+
+func (r *Router) ListenAndServe(server *http.Server) error {
+	server.Handler = r.serveMux
+
+	return server.ListenAndServe()
+}
+
+func (r *Router) ListenAndServeTLS(server *http.Server, certFile string, keyFile string) error {
+	server.Handler = r.serveMux
+
+	return server.ListenAndServeTLS(certFile, keyFile)
 }

@@ -1,2 +1,4 @@
 github.com/ahmetb/go-linq/v3 v3.2.0 h1:BEuMfp+b59io8g5wYzNoFe9pWPalRklhlhbiU3hYZDE=
 github.com/ahmetb/go-linq/v3 v3.2.0/go.mod h1:haQ3JfOeWK8HpVxMtHHEMPVgBKiYyQ+f1/kLZh/cj9U=
+github.com/turboyang-cn/exception v0.0.0-20211214035819-12be5c72a307 h1:IKocpeKy9dIeqw/T7XXNpELvM8jlpXEaXSyMSy3LJ4c=
+github.com/turboyang-cn/exception v0.0.0-20211214035819-12be5c72a307/go.mod h1:/puR2tlYfKKvRcRwd5sOmU4PI1wNrpJCEgBcywGEdcA=
